@@ -48,6 +48,7 @@ ArrayList<String>lil = new ArrayList<String>();
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id){
                 System.out.println(list.getItemAtPosition(position).toString());
+
             }
 
 

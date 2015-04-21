@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,8 +43,19 @@ ArrayList<String>lil = new ArrayList<String>();
         invokeWS();
 
     //text.setText("test");
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long id){
+                System.out.println(list.getItemAtPosition(position).toString());
+            }
+
+
+
+        });
         return view;
     }
+
     public void invokeWS() {
         // Show Progress Dialog
         // Make RESTful webservice call using AsyncHttpClient object

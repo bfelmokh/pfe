@@ -84,7 +84,7 @@ ArrayList<String>lil = new ArrayList<String>();
 
                         } catch (JSONException e) {
 
-                            Toast.makeText(getActivity().getApplicationContext(), "Error Occured while parsing [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity().getApplicationContext(), "Error Occured while parsing [Check your Server]", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 

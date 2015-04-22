@@ -6,6 +6,7 @@ package com.pfe.elmokhtar.domotique;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,9 @@ ArrayList<String>lil = new ArrayList<String>();
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id){
                 System.out.println(list.getItemAtPosition(position).toString());
+                Intent i = new Intent(getActivity(),peripheriques.class);
+                i.putExtra("group",list.getItemAtPosition(position).toString());
+                startActivity(i);
 
             }
 
@@ -61,7 +65,7 @@ ArrayList<String>lil = new ArrayList<String>();
         // Show Progress Dialog
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://192.168.0.100:8080/WEB-INF/groups/list",
+        client.get("http://192.168.21.169:8080/WEB-INF/groups/list",
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override

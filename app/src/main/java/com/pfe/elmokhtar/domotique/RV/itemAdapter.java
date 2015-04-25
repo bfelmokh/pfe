@@ -14,9 +14,10 @@ import java.util.List;
 /**
  * Created by benfraj on 25/04/2015.
  */
-public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHolder> {
+public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHolder> implements View.OnClickListener {
     private LayoutInflater inflater;
     private List<item> messages;
+
 
     public itemAdapter(LayoutInflater inflater, List<item> messages) {
         this.inflater = inflater;
@@ -45,6 +46,11 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
     @Override
     public int getItemCount() {
         return messages.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+    System.out.println("");
     }
 
     public static class MessagesViewHolder extends RecyclerView.ViewHolder {

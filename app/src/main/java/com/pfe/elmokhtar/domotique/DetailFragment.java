@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -41,7 +42,7 @@ ArrayList<item>lil = new ArrayList<item>();
         View view = inflater.inflate(R.layout.detailfragment, container, false);
         //TextView text= (TextView) view.findViewById(R.id.detail);
         msgView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        msgView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        msgView.setLayoutManager(new LinearLayoutManager(getActivity()));
        //  list = (ListView) view.findViewById(R.id.list);
         //Bundle test = getArguments();
         //String menu = getArguments().getString("Menu");
@@ -51,6 +52,18 @@ ArrayList<item>lil = new ArrayList<item>();
 
     //text.setText("test");
 
+        msgView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
+
+            @Override
+            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                return false;
+            }
+
+            @Override
+            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
+                System.out.println(motionEvent.toString());
+            }
+        });
        /* list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id){
@@ -63,7 +76,7 @@ ArrayList<item>lil = new ArrayList<item>();
 
 
 
-        });*/
+        }); */
         return view;
     }
 

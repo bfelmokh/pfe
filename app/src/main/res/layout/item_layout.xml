@@ -11,6 +11,7 @@
             android:id="@+id/idgroup"
             android:text="idgroup:"/>
         <TextView
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/nomgroup"

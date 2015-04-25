@@ -65,7 +65,7 @@ ArrayList<String>lil = new ArrayList<String>();
         // Show Progress Dialog
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://192.168.21.169:8080/WEB-INF/groups/list",
+        client.get("http://192.168.1.17:8080/WEB-INF/groups/list",
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override

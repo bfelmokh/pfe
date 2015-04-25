@@ -8,6 +8,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,8 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.pfe.elmokhtar.domotique.RV.item;
+import com.pfe.elmokhtar.domotique.RV.itemAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,13 +34,15 @@ import java.util.ArrayList;
 
 public class DetailFragment extends Fragment {
     ListView list;
-ArrayList<String>lil = new ArrayList<String>();
+    RecyclerView msgView;
+ArrayList<item>lil = new ArrayList<item>();
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle args) {
         View view = inflater.inflate(R.layout.detailfragment, container, false);
         //TextView text= (TextView) view.findViewById(R.id.detail);
-
-        list = (ListView) view.findViewById(R.id.list);
+        msgView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        msgView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+       //  list = (ListView) view.findViewById(R.id.list);
         //Bundle test = getArguments();
         //String menu = getArguments().getString("Menu");
 
@@ -45,7 +51,7 @@ ArrayList<String>lil = new ArrayList<String>();
 
     //text.setText("test");
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+       /* list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id){
                 System.out.println(list.getItemAtPosition(position).toString());
@@ -57,7 +63,7 @@ ArrayList<String>lil = new ArrayList<String>();
 
 
 
-        });
+        });*/
         return view;
     }
 
@@ -73,9 +79,11 @@ ArrayList<String>lil = new ArrayList<String>();
                         try {
                             System.out.println("here");
                             if(!lil.isEmpty()){
-                                ArrayAdapter<String> adapter;
-                                adapter = new ArrayAdapter<String>(DetailFragment.this.getActivity(), android.R.layout.simple_list_item_1, lil);
-                                list.setAdapter(adapter);
+                                //ArrayAdapter<String> adapter;
+                                //adapter = new ArrayAdapter<String>(DetailFragment.this.getActivity(), android.R.layout.simple_list_item_1, lil);
+                                //list.setAdapter(adapter);
+                                itemAdapter msgAdapter = new itemAdapter(getActivity().getLayoutInflater(), lil);
+                                msgView.setAdapter(msgAdapter);
                                 System.out.println("done!");}
                         }
                         catch (Exception e){
@@ -93,7 +101,7 @@ ArrayList<String>lil = new ArrayList<String>();
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject group = array.getJSONObject(i);
                                 System.out.println(group.getString("nom"));
-                                lil.add(i, group.getString("nom"));
+                                lil.add(i, new item(i+"", group.getString("nom")));
 
                             }
 

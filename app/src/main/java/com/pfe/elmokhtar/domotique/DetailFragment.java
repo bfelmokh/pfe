@@ -8,6 +8,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -51,19 +52,6 @@ ArrayList<item>lil = new ArrayList<item>();
         invokeWS();
 
     //text.setText("test");
-
-        msgView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView recyclerView, MotionEvent motionEvent) {
-                System.out.println(motionEvent.toString());
-            }
-        });
        /* list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id){
@@ -77,6 +65,7 @@ ArrayList<item>lil = new ArrayList<item>();
 
 
         }); */
+        msgView.setItemAnimator(new DefaultItemAnimator());
         return view;
     }
 

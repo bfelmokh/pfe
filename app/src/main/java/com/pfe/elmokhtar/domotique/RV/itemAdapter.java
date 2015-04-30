@@ -1,7 +1,5 @@
 package com.pfe.elmokhtar.domotique.RV;
 
-import android.graphics.Color;
-import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +25,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
 
     @Override
     public MessagesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemMessage = inflater.inflate(R.layout.item_layout, parent, false);
+        View itemMessage = inflater.inflate(R.layout.simple_item_layout_group, parent, false);
         MessagesViewHolder messagesViewHolder = new MessagesViewHolder(itemMessage);
         messagesViewHolder.view = itemMessage;
         messagesViewHolder.id = (TextView) itemMessage.findViewById(R.id.idgroup);

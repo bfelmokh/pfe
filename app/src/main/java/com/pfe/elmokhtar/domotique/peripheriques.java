@@ -14,7 +14,7 @@ public class peripheriques extends Activity {
         setContentView(R.layout.peripheriques);
         Switch s = (Switch) findViewById(R.id.etat);
         TextView tv = (TextView) findViewById(R.id.nom);
-        String nom = getIntent().getExtras().getString("group");
-        tv.setText(nom);
+        //String nom = getIntent().getExtras().getString("group");
+       // tv.setText(nom);
 }
 }

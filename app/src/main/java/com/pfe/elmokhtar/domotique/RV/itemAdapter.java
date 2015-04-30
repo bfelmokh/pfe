@@ -1,12 +1,16 @@
 package com.pfe.elmokhtar.domotique.RV;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.pfe.elmokhtar.domotique.Home;
 import com.pfe.elmokhtar.domotique.R;
+import com.pfe.elmokhtar.domotique.peripheriques;
 
 import java.util.List;
 
@@ -48,6 +52,8 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
                     // View v at position pos is long-clicked.
                 } else {
                     // View v at position pos is clicked.
+                    Intent i = new Intent(v.getContext(),peripheriques.class);
+                    v.getContext().startActivity(i);
                     System.out.println(messages.get(pos).getNom());
 
                 }

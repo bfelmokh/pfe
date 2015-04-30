@@ -1,4 +1,4 @@
-package com.pfe.elmokhtar.domotique.RV;
+package com.pfe.elmokhtar.domotique.RVgroup;
 
 /**
  * Created by benfraj on 25/04/2015.

@@ -6,26 +6,21 @@ package com.pfe.elmokhtar.domotique;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.pfe.elmokhtar.domotique.RV.item;
-import com.pfe.elmokhtar.domotique.RV.itemAdapter;
+import com.pfe.elmokhtar.domotique.RVgroup.item;
+import com.pfe.elmokhtar.domotique.RVgroup.itemAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

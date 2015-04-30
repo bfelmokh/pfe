@@ -1,21 +1,115 @@
 package com.pfe.elmokhtar.domotique;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.pfe.elmokhtar.domotique.RVperipherique.item;
+import com.pfe.elmokhtar.domotique.RVperipherique.itemAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by benfraj on 22/04/2015.
  */
 public class peripheriques extends Activity {
     RecyclerView rv ;
+    ArrayList<item> lil = new ArrayList<item>();
+    String nom;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.peripheriques);
         rv=(RecyclerView) findViewById(R.id.RVperipherique);
-        String nom = getIntent().getExtras().getString("group");
+        nom = getIntent().getExtras().getString("group");
         setTitle(nom);
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        invokeWS();
 }
+    public void invokeWS() {
+        // Show Progress Dialog
+        // Make RESTful webservice call using AsyncHttpClient object
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://192.168.1.2:8080/WEB-INF/peripherique/list/"+nom,
+                new AsyncHttpResponseHandler() {
+                    // When the response returned by REST has Http response code '200'
+                    @Override
+                    public void onFinish(){
+                        try {
+                            System.out.println("here");
+                            if(!lil.isEmpty()){
+                                //ArrayAdapter<String> adapter;
+                                //adapter = new ArrayAdapter<String>(DetailFragment.this.getActivity(), android.R.layout.simple_list_item_1, lil);
+                                //list.setAdapter(adapter);
+                                itemAdapter msgAdapter = new itemAdapter(getLayoutInflater(), lil);
+                                rv.setAdapter(msgAdapter);
+                                System.out.println("done!");}
+                        }
+                        catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                    public void onSuccess(String response) {
+                        // Hide Progress Dialog
+                        try {
+                            // Extract JSON Object from JSON returned by REST WS
+                            JSONObject obj = new JSONObject(response);
+                            // When the JSON response has status boolean value set to true
+                            JSONArray array= obj.getJSONArray("peripheriques");
+                            /*loop*/
+                            for (int i=0; i<array.length(); i++) {
+                                JSONObject peripherique = array.getJSONObject(i);
+                                System.out.println(peripherique.getString("nom"));
+                                lil.add(i, new item(i+"", peripherique.getString("nom"),peripherique.getString("etat_actuel")));
+
+                            }
+
+
+
+                        } catch (JSONException e) {
+
+                            Toast.makeText(getApplicationContext(), "Error Occured while parsing [Check your Server]", Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    // When the response returned by REST has Http response code other than '200' such as '404', '500' or '403' etc
+                    @Override
+                    public void onFailure(int statusCode, Throwable error, String content) {
+                        // Hide Progress Dialog
+
+                        // When Http response code is '404'
+                        if (statusCode == 404) {
+                            Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+                        }
+                        // When Http response code is '500'
+                        else if (statusCode == 500) {
+                            Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+                        }
+                        // When Http response code other than 404, 500
+                        else {
+                            Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might " +
+                                            "not be connected to Internet or remote server is not up and running], check for other errors as well",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+
+
+
+                });
+    }
 }

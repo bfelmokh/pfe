@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.pfe.elmokhtar.domotique.R;
@@ -32,7 +33,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
         messagesViewHolder.view = itemMessage;
         messagesViewHolder.id = (TextView) itemMessage.findViewById(R.id.idperipherique);
         messagesViewHolder.nom = (TextView) itemMessage.findViewById(R.id.nomperipherique);
-        messagesViewHolder.value = (TextView) itemMessage.findViewById(R.id.etatperi);
+        messagesViewHolder.value = (Switch) itemMessage.findViewById(R.id.etatperi);
 
         return messagesViewHolder;
     }
@@ -42,7 +43,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
         com.pfe.elmokhtar.domotique.RVperipherique.item message = messages.get(position);
         holder.id.setText(message.getId());
         holder.nom.setText(message.getNom());
-        holder.value.setText(message.getValue());
+        holder.value.setChecked(Boolean.valueOf(message.getValue()));
         holder.position = position;
 
         holder.setClickListener(new MessagesViewHolder.ClickListener() {
@@ -68,7 +69,8 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
 
     public static class MessagesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener{
         View view;
-        TextView id,nom,value;
+        TextView id,nom;
+        Switch value;
         int position;
         private ClickListener clickListener;
         public MessagesViewHolder(View itemView) {

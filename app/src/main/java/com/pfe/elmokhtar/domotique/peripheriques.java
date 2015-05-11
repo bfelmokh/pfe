@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -24,14 +26,17 @@ import java.util.ArrayList;
 /**
  * Created by benfraj on 22/04/2015.
  */
-public class peripheriques extends Activity {
+public class peripheriques extends Activity implements View.OnTouchListener {
     RecyclerView rv ;
     ArrayList<item> lil = new ArrayList<item>();
     String nom;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.peripheriques);
+        View v1 = (View)findViewById(R.id.pv);
+
         rv=(RecyclerView) findViewById(R.id.RVperipherique);
+        rv.setOnTouchListener(this);
         nom = getIntent().getExtras().getString("group");
         setTitle(nom);
         rv.setLayoutManager(new LinearLayoutManager(this));
@@ -42,7 +47,7 @@ public class peripheriques extends Activity {
         // Show Progress Dialog
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://192.168.1.2:8080/WEB-INF/peripherique/list/"+nom,
+        client.get("http://"+R.string.IP+"/WEB-INF/peripherique/list/"+nom,
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override
@@ -69,6 +74,7 @@ public class peripheriques extends Activity {
                             // When the JSON response has status boolean value set to true
                             JSONArray array= obj.getJSONArray("peripheriques");
                             /*loop*/
+                            lil.clear();
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject peripherique = array.getJSONObject(i);
                                 System.out.println(peripherique.getString("nom"));
@@ -111,5 +117,33 @@ public class peripheriques extends Activity {
 
 
                 });
+    }
+    // onTouchEvent () method gets called when User performs any touch event on screen
+    // Method to handle touch event like left to right swap and right to left swap
+    public boolean onTouchEvent(MotionEvent touchevent)
+    {
+        switch (touchevent.getAction())
+        {
+            // when user first touches the screen we get x and y coordinate
+            case MotionEvent.ACTION_DOWN:
+
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+
+                break;
+
+            case MotionEvent.ACTION_UP:
+                invokeWS();
+                break;
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        onTouchEvent(event);
+        return false;
     }
 }

@@ -22,6 +22,9 @@ public class item {
         return nom;
     }
     public String getValue(){
-        return value;
+        if(value.equals("1"))
+            return "true";
+        else
+            return "false";
     }
 }

@@ -72,7 +72,7 @@ public class CheckLoginActivity extends Activity {
         prgDialog.show();
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://192.168.1.3:8080/WEB-INF/login/docheck",params,
+        client.get("http://"+R.string.IP+"/WEB-INF/login/docheck",params,
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override

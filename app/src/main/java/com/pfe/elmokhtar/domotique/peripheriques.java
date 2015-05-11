@@ -47,7 +47,7 @@ public class peripheriques extends Activity implements View.OnTouchListener {
         // Show Progress Dialog
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://"+R.string.IP+"/WEB-INF/peripherique/list/"+nom,
+        client.get("http://"+getString(R.string.IP)+"/WEB-INF/peripherique/list/"+nom,
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override

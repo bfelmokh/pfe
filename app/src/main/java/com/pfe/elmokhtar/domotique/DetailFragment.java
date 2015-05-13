@@ -68,7 +68,7 @@ ArrayList<item>lil = new ArrayList<item>();
         // Show Progress Dialog
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://"+getString(R.string.IP)+"/WEB-INF/groups/list",
+        client.get("http://"+getString(R.string.IP)+"/WEB-INF/pieces/list",
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override
@@ -93,7 +93,7 @@ ArrayList<item>lil = new ArrayList<item>();
                             // Extract JSON Object from JSON returned by REST WS
                             JSONObject obj = new JSONObject(response);
                             // When the JSON response has status boolean value set to true
-                            JSONArray array= obj.getJSONArray("group");
+                            JSONArray array= obj.getJSONArray("piece");
                             /*loop*/
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject group = array.getJSONObject(i);

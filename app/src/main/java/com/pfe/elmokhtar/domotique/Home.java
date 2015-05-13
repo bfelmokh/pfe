@@ -43,7 +43,7 @@ public class Home extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        menu = new String[]{"Groupes", "Consommation", "Historiques", "Scénarios", "Paramétres", "Se déconnecter"};
+        menu = new String[]{"Pieces", "Consommation", "Historiques", "Scénarios", "Paramétres", "Se déconnecter"};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menu);

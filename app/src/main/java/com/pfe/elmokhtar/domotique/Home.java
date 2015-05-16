@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.pfe.elmokhtar.domotique.historique.historiqueFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,15 +63,15 @@ public class Home extends Activity {
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
                 dLayout.closeDrawers();
 
-                Fragment detail = new DetailFragment();
-                Bundle args = new Bundle();
-                args.putString("Menu", menu[position]);
+
 
                 if (position == 0) {
                 /*
                 Pieces
                  */
-
+                    Fragment detail = new DetailFragment();
+                    Bundle args = new Bundle();
+                    args.putString("Menu", menu[position]);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame, detail).commit();
                 //    args.putStringArrayList("lp", li);
@@ -81,7 +82,13 @@ public class Home extends Activity {
                     /*
                 Pieces
                  */
-
+                if(position == 2){
+                    Fragment historique= new historiqueFragment();
+                    Bundle args = new Bundle();
+                    args.putString("Menu",menu[position]);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame,historique);
+                }
 
                 if (position == 5) {
 

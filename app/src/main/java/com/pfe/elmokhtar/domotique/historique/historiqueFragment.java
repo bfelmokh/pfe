@@ -120,6 +120,6 @@ public class historiqueFragment extends Fragment {
             etatt="allumé";
         }
 
-        return "Au "+temps+" le peripherique "+nom+" du "+piece+" a était "+etatt;
+        return "Au "+temps+" le peripherique "+nom+" du "+piece+" a était "+etatt+".";
     }
 }

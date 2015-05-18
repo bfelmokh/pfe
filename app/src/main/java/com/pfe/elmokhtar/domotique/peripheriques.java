@@ -78,7 +78,7 @@ public class peripheriques extends Activity implements View.OnTouchListener {
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject peripherique = array.getJSONObject(i);
                                 System.out.println(peripherique.getString("nom"));
-                                lil.add(i, new item(i+"", peripherique.getString("nom"),peripherique.getString("etat_actuel")));
+                                lil.add(i, new item(peripherique.getString("id"), peripherique.getString("nom"),peripherique.getString("etat_actuel")));
 
                             }
 

@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHolder> {
+    View itemMessage;
     private LayoutInflater inflater;
     private List<com.pfe.elmokhtar.domotique.RVperipherique.item> messages;
 
@@ -39,7 +40,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
 
     @Override
     public MessagesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemMessage = inflater.inflate(R.layout.default_item_layout_peripherique, parent, false);
+        itemMessage = inflater.inflate(R.layout.default_item_layout_peripherique, parent, false);
         MessagesViewHolder messagesViewHolder = new MessagesViewHolder(itemMessage);
         messagesViewHolder.view = itemMessage;
         messagesViewHolder.id = (TextView) itemMessage.findViewById(R.id.idperipherique);
@@ -56,10 +57,15 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
         holder.nom.setText(message.getNom());
         holder.value.setChecked(Boolean.valueOf(message.getValue()));
         holder.value.setText(message.getId());
+        System.out.println(message.getId());
         holder.value.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                System.out.println(buttonView.getText() +" "+ isChecked);
+                InputMethodManager imm = (InputMethodManager) itemMessage.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                RequestParams params = new RequestParams();
+                params.put("id",buttonView.getText());
+                params.put("value",Boolean.toString(isChecked));
+                invokeWS(itemMessage, params);
             }
         });
         holder.position = position;

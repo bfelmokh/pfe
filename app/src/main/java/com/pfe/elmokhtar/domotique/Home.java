@@ -63,7 +63,7 @@ public class Home extends Activity {
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
                 dLayout.closeDrawers();
 
-
+                FragmentManager fragmentManager = getFragmentManager();
 
                 if (position == 0) {
                 /*
@@ -72,7 +72,7 @@ public class Home extends Activity {
                     Fragment detail = new DetailFragment();
                     Bundle args = new Bundle();
                     args.putString("Menu", menu[position]);
-                    FragmentManager fragmentManager = getFragmentManager();
+
                     fragmentManager.beginTransaction().replace(R.id.content_frame, detail).commit();
                 //    args.putStringArrayList("lp", li);
                  //   detail.setArguments(args);
@@ -83,11 +83,11 @@ public class Home extends Activity {
                 Pieces
                  */
                 if(position == 2){
+
                     Fragment historique= new historiqueFragment();
                     Bundle args = new Bundle();
                     args.putString("Menu",menu[position]);
-                    FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame,historique);
+                    fragmentManager.beginTransaction().replace(R.id.content_frame,historique).commit();
                 }
 
                 if (position == 5) {

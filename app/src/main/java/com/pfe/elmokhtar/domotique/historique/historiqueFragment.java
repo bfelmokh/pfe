@@ -16,8 +16,6 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.pfe.elmokhtar.domotique.R;
-import com.pfe.elmokhtar.domotique.RVgroup.item;
-import com.pfe.elmokhtar.domotique.RVgroup.itemAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,14 +50,13 @@ public class historiqueFragment extends Fragment {
                     @Override
                     public void onFinish(){
                         try {
-                            System.out.println("here");
                             if(!lil.isEmpty()){
                                 //ArrayAdapter<String> adapter;
                                 //adapter = new ArrayAdapter<String>(DetailFragment.this.getActivity(), android.R.layout.simple_list_item_1, lil);
                                 //list.setAdapter(adapter);
                                 itemAdapter msgAdapter = new itemAdapter(getActivity().getLayoutInflater(), lil);
                                 msgView.setAdapter(msgAdapter);
-                                System.out.println("done!");}
+                                }
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -76,8 +73,7 @@ public class historiqueFragment extends Fragment {
                             lil.clear();
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject group = array.getJSONObject(i);
-                                System.out.println(group.getString("nom"));
-                                lil.add(i, new item(i+"", group.getString("nom")));
+                                lil.add(i, new item(i+"", convertir(group.getString("piece"), group.getString("nom"), group.getBoolean("etat"), group.getString("temps"))));
 
                             }
 
@@ -116,5 +112,14 @@ public class historiqueFragment extends Fragment {
 
 
                 });
+    }
+
+    private String convertir(String piece, String nom, Boolean etat, String temps) {
+        String etatt = "eteint";
+        if(etat){
+            etatt="allumé";
+        }
+
+        return "Au "+temps+" le peripherique "+nom+" du "+piece+" a était "+etatt;
     }
 }

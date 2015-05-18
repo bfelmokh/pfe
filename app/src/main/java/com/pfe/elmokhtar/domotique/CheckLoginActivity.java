@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -23,7 +24,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class CheckLoginActivity extends Activity {
-
+    SharedPreferences sp;
     private EditText pseudo;
     private EditText mdp;
     private TextView textView;
@@ -87,18 +88,24 @@ public class CheckLoginActivity extends Activity {
                                 // Set 'Thumb up' Image as status image
                                 imgView.setBackgroundResource(R.drawable.ic_action_good);
                                 // Set Status message
+                                //local storage with Shared preferences
+                                sp = getSharedPreferences("login",Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putString("pseudo",pseudo.getText().toString());
+                                editor.commit();
+
+
 
                                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
 
 
-                                Toast.makeText(getApplicationContext(),"WS Inovation Done", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Bienvenue !", Toast.LENGTH_LONG).show();
                             }
                             // Else display error message set in JSON response
                             else {
                                 imgView.setBackgroundResource(R.drawable.ic_action_warning);
                                 textView.setText(obj.getString("error_msg"));
-                                Toast.makeText(getApplicationContext(), "WS Inovation Done",Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {
 

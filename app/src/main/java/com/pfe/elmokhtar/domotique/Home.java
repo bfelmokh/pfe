@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 /**
@@ -40,9 +41,15 @@ public class Home extends Activity {
     DrawerLayout dLayout;
     ListView dList;
     ArrayAdapter<String> adapter ;
+    SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sp = getSharedPreferences("login",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor =sp.edit();
+        System.out.println(sp.getString("pseudo",""));
+
+
         setContentView(R.layout.activity_home);
         menu = new String[]{"Pieces", "Consommation", "Historiques", "Scénarios", "Paramétres", "Se déconnecter"};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

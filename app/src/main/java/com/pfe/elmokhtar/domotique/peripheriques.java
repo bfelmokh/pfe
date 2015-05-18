@@ -73,7 +73,7 @@ public class peripheriques extends Activity implements View.OnTouchListener {
                             JSONObject obj = new JSONObject(response);
                             // When the JSON response has status boolean value set to true
                             JSONArray array= obj.getJSONArray("peripheriques");
-                            /*loop*/
+
                             lil.clear();
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject peripherique = array.getJSONObject(i);

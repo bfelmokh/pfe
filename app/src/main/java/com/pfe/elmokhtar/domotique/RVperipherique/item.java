@@ -21,10 +21,11 @@ public class item {
     public String getNom() {
         return nom;
     }
-    public String getValue(){
+    public Boolean getValue(){
+
         if(value.equals("1"))
-            return "true";
+            return true;
         else
-            return "false";
+            return false;
     }
 }

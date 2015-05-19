@@ -22,4 +22,11 @@ public class Utility {
     public static boolean isNotNull(String txt){
         return txt!=null && txt.trim().length()>0 ? true: false;
     }
+
+    public static int convertToInt(Boolean aBoolean) {
+        if (aBoolean)
+                return 1;
+        else
+            return 0;
+    }
 }

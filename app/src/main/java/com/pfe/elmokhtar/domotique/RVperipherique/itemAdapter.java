@@ -21,6 +21,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.pfe.elmokhtar.domotique.R;
+import com.pfe.elmokhtar.domotique.Utility;
 import com.pfe.elmokhtar.domotique.peripheriques;
 
 import org.json.JSONArray;
@@ -62,13 +63,11 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
         holder.nom.setText(message.getNom());
         holder.value.setChecked(Boolean.valueOf(message.getValue()));
         holder.value.setText(message.getId());
-        System.out.println(message.getId());
         holder.value.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 InputMethodManager imm = (InputMethodManager) itemMessage.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                System.out.println(buttonView.getText()+ Boolean.toString(isChecked));
-                //invokeWS(itemMessage, buttonView.getText(), Boolean.toString(isChecked));
+                invokeWS(itemMessage, String.valueOf(buttonView.getText()),isChecked);
             }
         });
         holder.position = position;
@@ -81,8 +80,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
                 } else {
                     // View v at position pos is clicked.
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    System.out.println(messages.get(pos).getId()+messages.get(pos).getValue());
-                    //invokeWS(v, messages.get(pos).getId(),messages.get(pos).getValue());
+                   //invokeWS(v, messages.get(pos).getId(),!messages.get(pos).getValue());
 
                 }
             }
@@ -142,19 +140,20 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
         }
     }
 
-    public void invokeWS(View v, final String id, final String value) {
+    public void invokeWS(View v, final String id, final boolean value) {
         final View vi = v;
-        final String params=id+"/"+value;
+        int etat = Utility.convertToInt(Boolean.valueOf(value));
+           System.out.println(Boolean.valueOf(value));
         // Show Progress Dialog
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://"+v.getContext().getString(R.string.IP)+"/WEB-INF/peripherique/list/salon",
+        client.get("http://"+v.getContext().getString(R.string.IP)+"/WEB-INF/peripherique/changer/"+user+"/"+id+"/"+etat,
                 new AsyncHttpResponseHandler() {
                     // When the response returned by REST has Http response code '200'
                     @Override
                     public void onFinish(){
                         try {
-                            System.out.println("here"+params);
+                            System.out.println("here"+id+value);
                         }
                         catch (Exception e){
                             e.printStackTrace();

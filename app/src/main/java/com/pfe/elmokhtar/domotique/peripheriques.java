@@ -2,6 +2,7 @@ package com.pfe.elmokhtar.domotique;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,16 +31,20 @@ public class peripheriques extends Activity implements View.OnTouchListener {
     RecyclerView rv ;
     ArrayList<item> lil = new ArrayList<item>();
     String nom;
+    String user;
+    SharedPreferences sp;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.peripheriques);
         View v1 = (View)findViewById(R.id.pv);
-
         rv=(RecyclerView) findViewById(R.id.RVperipherique);
         rv.setOnTouchListener(this);
         nom = getIntent().getExtras().getString("group");
         setTitle(nom);
         rv.setLayoutManager(new LinearLayoutManager(this));
+        sp = getSharedPreferences("login",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor =sp.edit();
+        user = sp.getString("pseudo","");
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         invokeWS();
 }
@@ -53,14 +58,14 @@ public class peripheriques extends Activity implements View.OnTouchListener {
                     @Override
                     public void onFinish(){
                         try {
-                            System.out.println("here");
+
                             if(!lil.isEmpty()){
                                 //ArrayAdapter<String> adapter;
                                 //adapter = new ArrayAdapter<String>(DetailFragment.this.getActivity(), android.R.layout.simple_list_item_1, lil);
                                 //list.setAdapter(adapter);
-                                itemAdapter msgAdapter = new itemAdapter(getLayoutInflater(), lil);
+                                itemAdapter msgAdapter = new itemAdapter(getLayoutInflater(), lil,user);
                                 rv.setAdapter(msgAdapter);
-                                System.out.println("done!");}
+                                }
                         }
                         catch (Exception e){
                             e.printStackTrace();
@@ -77,7 +82,6 @@ public class peripheriques extends Activity implements View.OnTouchListener {
                             lil.clear();
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject peripherique = array.getJSONObject(i);
-                                System.out.println(peripherique.getString("nom"));
                                 lil.add(i, new item(peripherique.getString("id"), peripherique.getString("nom"),peripherique.getString("etat_actuel")));
 
                             }

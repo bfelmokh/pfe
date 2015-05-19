@@ -41,13 +41,11 @@ public class Home extends Activity {
     DrawerLayout dLayout;
     ListView dList;
     ArrayAdapter<String> adapter ;
-    SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sp = getSharedPreferences("login",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor =sp.edit();
-        System.out.println(sp.getString("pseudo",""));
+
 
 
         setContentView(R.layout.activity_home);

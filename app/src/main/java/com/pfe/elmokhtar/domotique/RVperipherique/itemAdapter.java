@@ -6,6 +6,7 @@ package com.pfe.elmokhtar.domotique.RVperipherique;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,16 +32,19 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
     View itemMessage;
     private LayoutInflater inflater;
     private List<com.pfe.elmokhtar.domotique.RVperipherique.item> messages;
+    private String user;
 
-
-    public itemAdapter(LayoutInflater inflater, List<com.pfe.elmokhtar.domotique.RVperipherique.item> messages) {
+    public itemAdapter(LayoutInflater inflater, List<com.pfe.elmokhtar.domotique.RVperipherique.item> messages,String user) {
         this.inflater = inflater;
         this.messages = messages;
+        this.user=user;
     }
 
     @Override
     public MessagesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         itemMessage = inflater.inflate(R.layout.default_item_layout_peripherique, parent, false);
+
+
         MessagesViewHolder messagesViewHolder = new MessagesViewHolder(itemMessage);
         messagesViewHolder.view = itemMessage;
         messagesViewHolder.id = (TextView) itemMessage.findViewById(R.id.idperipherique);
@@ -53,6 +57,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
     @Override
     public void onBindViewHolder(MessagesViewHolder holder, int position) {
         com.pfe.elmokhtar.domotique.RVperipherique.item message = messages.get(position);
+
         holder.id.setText(message.getId());
         holder.nom.setText(message.getNom());
         holder.value.setChecked(Boolean.valueOf(message.getValue()));
@@ -62,10 +67,8 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 InputMethodManager imm = (InputMethodManager) itemMessage.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                RequestParams params = new RequestParams();
-                params.put("id",buttonView.getText());
-                params.put("value",Boolean.toString(isChecked));
-                invokeWS(itemMessage, params);
+                System.out.println(buttonView.getText()+ Boolean.toString(isChecked));
+                //invokeWS(itemMessage, buttonView.getText(), Boolean.toString(isChecked));
             }
         });
         holder.position = position;
@@ -78,12 +81,8 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
                 } else {
                     // View v at position pos is clicked.
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-
-                    System.out.println(messages.get(pos).getNom());
-                    RequestParams params = new RequestParams();
-                    params.put("id",messages.get(pos).getId());
-                    params.put("value",messages.get(pos).getValue());
-                    invokeWS(v, params);
+                    System.out.println(messages.get(pos).getId()+messages.get(pos).getValue());
+                    //invokeWS(v, messages.get(pos).getId(),messages.get(pos).getValue());
 
                 }
             }
@@ -142,9 +141,10 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
             return true;
         }
     }
-    public void invokeWS(View v,RequestParams params) {
+
+    public void invokeWS(View v, final String id, final String value) {
         final View vi = v;
-        final String paramss = params.toString();
+        final String params=id+"/"+value;
         // Show Progress Dialog
         // Make RESTful webservice call using AsyncHttpClient object
         AsyncHttpClient client = new AsyncHttpClient();
@@ -154,7 +154,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
                     @Override
                     public void onFinish(){
                         try {
-                            System.out.println("here"+paramss);
+                            System.out.println("here"+params);
                         }
                         catch (Exception e){
                             e.printStackTrace();

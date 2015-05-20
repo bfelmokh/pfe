@@ -6,6 +6,7 @@ package com.pfe.elmokhtar.domotique ;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -42,12 +43,19 @@ public class CheckLoginActivity extends Activity {
         mdp = (EditText) findViewById(R.id.password);
         textView = (TextView) findViewById(R.id.tv_result);
         imgView = (ImageView) findViewById(R.id.progressBar1);
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(false); // disable the button
+            actionBar.setDisplayHomeAsUpEnabled(false); // remove the left caret
+            actionBar.setDisplayShowHomeEnabled(false); // remove the icon
+        }
         i = new Intent(this , Home.class);
         prgDialog = new ProgressDialog(this);
         // Set Progress Dialog Text
         prgDialog.setMessage("Please wait...");
         // Set Cancelable as False
         prgDialog.setCancelable(false);
+
     }
 
     public void checkbtn(View v) {

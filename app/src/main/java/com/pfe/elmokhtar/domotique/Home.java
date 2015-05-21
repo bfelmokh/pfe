@@ -13,7 +13,9 @@ import android.os.Bundle;
  */
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -41,25 +43,47 @@ public class Home extends Activity {
     DrawerLayout dLayout;
     ListView dList;
     ArrayAdapter<String> adapter ;
-
+    ActionBarDrawerToggle mDrawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
         setContentView(R.layout.activity_home);
-        menu = new String[]{"Pieces", "Consommation", "Historiques", "Scénarios", "Paramétres", "Se déconnecter"};
+        menu = new String[]{"Pièces", "Statistiques", "Historiques", "Scénarios", "Paramétres", "Se déconnecter"};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menu);
         dLayout.openDrawer(this.dList);
-        ActionBar actionBar = getActionBar();
+
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this,                  /* host Activity */
+                dLayout,         /* DrawerLayout object */
+                R.drawable.ic_drawer,  /* nav drawer icon to replace 'Up' caret */
+                R.string.hello_world,  /* "open drawer" description */
+                R.string.hello_world  /* "close drawer" description */
+        ) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                //getActionBar().setTitle("Title");
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                //getActionBar().setTitle("Title");
+            }
+        };
+
+        /*ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(false); // disable the button
             actionBar.setDisplayHomeAsUpEnabled(false); // remove the left caret
             actionBar.setDisplayShowHomeEnabled(true); // remove the icon
         }
+*/       dLayout.setDrawerListener(mDrawerToggle);
+
+
         dList.setAdapter(adapter);
         dList.getContext().setTheme(android.R.style.Theme_Material_Light);
         dList.setSelector(android.R.color.holo_blue_light);
@@ -109,5 +133,15 @@ public class Home extends Activity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
 
+        return super.onOptionsItemSelected(item);
+    }
 }

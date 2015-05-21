@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.pfe.elmokhtar.domotique.DividerItemDecoration;
 import com.pfe.elmokhtar.domotique.R;
 
 import org.json.JSONArray;
@@ -37,6 +38,7 @@ public class historiqueFragment extends Fragment {
         msgView.setLayoutManager(new LinearLayoutManager(getActivity()));
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         invokeWS();
+        //msgView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         msgView.setItemAnimator(new DefaultItemAnimator());
         return view;
     }
@@ -73,7 +75,7 @@ public class historiqueFragment extends Fragment {
                             lil.clear();
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject group = array.getJSONObject(i);
-                                lil.add(i, new item(i+"", convertir(group.getString("piece"), group.getString("nom"), group.getBoolean("etat"), group.getString("temps"))));
+                                lil.add(i, new item(i+"", convertir(group.getString("piece"), group.getString("nom"), group.getBoolean("etat")),group.getString("temps")));
 
                             }
 
@@ -114,12 +116,12 @@ public class historiqueFragment extends Fragment {
                 });
     }
 
-    private String convertir(String piece, String nom, Boolean etat, String temps) {
+    private String convertir(String piece, String nom, Boolean etat) {
         String etatt = "eteint";
         if(etat){
             etatt="allumé";
         }
 
-        return "- Au "+temps+" le peripherique "+nom+" du "+piece+" a été "+etatt+".";
+        return "le peripherique "+nom+" du "+piece+" a été "+etatt+".";
     }
 }

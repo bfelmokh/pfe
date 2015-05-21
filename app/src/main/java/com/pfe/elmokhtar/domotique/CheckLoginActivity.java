@@ -43,12 +43,6 @@ public class CheckLoginActivity extends Activity {
         mdp = (EditText) findViewById(R.id.password);
         textView = (TextView) findViewById(R.id.tv_result);
         imgView = (ImageView) findViewById(R.id.progressBar1);
-        ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeButtonEnabled(false); // disable the button
-            actionBar.setDisplayHomeAsUpEnabled(false); // remove the left caret
-            actionBar.setDisplayShowHomeEnabled(false); // remove the icon
-        }
         i = new Intent(this , Home.class);
         prgDialog = new ProgressDialog(this);
         // Set Progress Dialog Text

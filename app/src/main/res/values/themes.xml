@@ -4,8 +4,8 @@
     <style name="CustomActionBarTheme"
         parent="android:Theme.Material.Light">
         <item name="android:navigationIcon">@drawable/ic_drawer</item>
-        <item name="android:icon">@drawable/ic_drawer</item>
-        <item name="android:iconPreview">@drawable/ic_drawer</item>
+        <!--<item name="android:icon">@drawable/ic_drawer</item>
+        <item name="android:iconPreview">@drawable/ic_drawer</item>-->
         <item name="android:colorPrimary">@color/blue_azur</item>
         <item name="android:colorPrimaryDark">@color/blue_azur2</item>
         <item name="android:textColorPrimary">#ffffff</item>

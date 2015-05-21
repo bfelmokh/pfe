@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue_azur">#007FFF</color>
-    <color name="blue_azur2">#006FFF</color>
+    <color name="blue_azur">#67B1D6</color>
+    <color name="blue_azur2">#5290AC</color>
+    <color name="bgcolor">#e8e8e8</color>
+    <color name="noir">#38474f</color>
 </resources>

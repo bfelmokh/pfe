@@ -144,4 +144,8 @@ public class Home extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public void onBackPressed() {
+
+    }
 }

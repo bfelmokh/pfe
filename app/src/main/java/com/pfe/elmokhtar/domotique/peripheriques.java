@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
@@ -33,6 +34,7 @@ public class peripheriques extends Activity implements View.OnTouchListener {
     String nom;
     String user;
     SharedPreferences sp;
+    SwipeRefreshLayout mSwipeRefresh;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.peripheriques);
@@ -47,6 +49,15 @@ public class peripheriques extends Activity implements View.OnTouchListener {
         user = sp.getString("pseudo","");
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         invokeWS();
+        mSwipeRefresh=(SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Here i do some job
+                invokeWS();
+                mSwipeRefresh.setRefreshing(false);
+            }
+        });
 }
     public void invokeWS() {
         // Show Progress Dialog
@@ -138,7 +149,7 @@ public class peripheriques extends Activity implements View.OnTouchListener {
                 break;
 
             case MotionEvent.ACTION_UP:
-                invokeWS();
+                //invokeWS();
                 break;
 
         }

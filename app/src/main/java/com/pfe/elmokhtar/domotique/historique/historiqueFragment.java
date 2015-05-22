@@ -3,6 +3,7 @@ package com.pfe.elmokhtar.domotique.historique;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.pfe.elmokhtar.domotique.DividerItemDecoration;
 import com.pfe.elmokhtar.domotique.R;
 
 import org.json.JSONArray;
@@ -31,6 +31,7 @@ public class historiqueFragment extends Fragment {
     ListView list;
     RecyclerView msgView;
     ArrayList<item> lil = new ArrayList<item>();
+    SwipeRefreshLayout mSwipeRefresh;
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle args) {
         View view = inflater.inflate(R.layout.historique_fragment, container, false);
@@ -39,6 +40,17 @@ public class historiqueFragment extends Fragment {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         invokeWS();
         //msgView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
+        /*refresh test*/
+        mSwipeRefresh=(SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Here i do some job
+                invokeWS();
+                mSwipeRefresh.setRefreshing(false);
+            }
+        });
+
         msgView.setItemAnimator(new DefaultItemAnimator());
         return view;
     }

@@ -7,8 +7,9 @@ public class item {
 
     private String nom;
     private String date;
-    public item(String id, String nom, String date) {
-
+    private String pseudo;
+    public item(String id, String nom, String date, String pseudo) {
+        this.pseudo=pseudo;
         this.nom = nom;
         this.date = date;
     }
@@ -20,6 +21,9 @@ public class item {
     }
     public String getDate() {
         return date;
+    }
+    public String getPseudo() {
+        return pseudo;
     }
 
 

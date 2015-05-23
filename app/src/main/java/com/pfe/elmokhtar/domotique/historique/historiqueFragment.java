@@ -87,7 +87,7 @@ public class historiqueFragment extends Fragment {
                             lil.clear();
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject group = array.getJSONObject(i);
-                                lil.add(i, new item(i+"", convertir(group.getString("piece"), group.getString("nom"), group.getBoolean("etat")),group.getString("temps")));
+                                lil.add(i, new item(i+"", convertir(group.getString("piece"), group.getString("nom"), group.getInt("etat")),group.getString("date"),group.getString("pseudo")));
 
                             }
 
@@ -128,9 +128,9 @@ public class historiqueFragment extends Fragment {
                 });
     }
 
-    private String convertir(String piece, String nom, Boolean etat) {
+    private String convertir(String piece, String nom, int etat) {
         String etatt = "eteint";
-        if(etat){
+        if(etat==1){
             etatt="allumé";
         }
 

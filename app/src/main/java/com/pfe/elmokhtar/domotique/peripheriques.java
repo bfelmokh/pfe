@@ -88,12 +88,12 @@ public class peripheriques extends Activity implements View.OnTouchListener {
                             // Extract JSON Object from JSON returned by REST WS
                             JSONObject obj = new JSONObject(response);
                             // When the JSON response has status boolean value set to true
-                            JSONArray array= obj.getJSONArray("peripheriques");
+                            JSONArray array= obj.getJSONArray("peripherique");
 
                             lil.clear();
                             for (int i=0; i<array.length(); i++) {
                                 JSONObject peripherique = array.getJSONObject(i);
-                                lil.add(i, new item(peripherique.getString("id"), peripherique.getString("nom"),peripherique.getString("etat_actuel")));
+                                lil.add(i, new item(peripherique.getString("id"), peripherique.getString("nom"),peripherique.getString("etat")));
 
                             }
 

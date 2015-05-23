@@ -30,6 +30,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
         messagesViewHolder.view = itemMessage;
         messagesViewHolder.nom = (TextView) itemMessage.findViewById(R.id.histo);
         messagesViewHolder.date = (TextView) itemMessage.findViewById(R.id.histodate);
+        messagesViewHolder.pseudo = (TextView) itemMessage.findViewById(R.id.histouser);
         return messagesViewHolder;
     }
 
@@ -38,6 +39,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
         item message = messages.get(position);
         holder.nom.setText(message.getNom());
         holder.date.setText(message.getDate());
+        holder.pseudo.setText(message.getPseudo());
         holder.position = position;
 
     }
@@ -52,6 +54,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
         View view;
         TextView nom;
         TextView date;
+        TextView pseudo;
         int position;
 
         public MessagesViewHolder(View itemView) {

@@ -20,28 +20,35 @@
         android:textColor="@color/noir"
         android:id="@+id/histo"
         android:text="nom"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:textSize="12dp"
+            android:typeface="serif"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textColor="@color/gris"
+            android:id="@+id/histouser"
+            android:text="nom"/>
     <TextView
         android:textSize="12dp"
         android:typeface="serif"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:textColor="@color/material_blue_grey_800"
+        android:textColor="@color/gris"
         android:id="@+id/histodate"
-        android:text="nom"/>
-    <TextView
-        android:textSize="12dp"
-        android:typeface="serif"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:textColor="@color/material_blue_grey_800"
-        android:id="@+id/histouser"
-        android:text="nom"/>
+        android:text="nom"
+        android:gravity="right" />
+
+    </LinearLayout>
 </LinearLayout>

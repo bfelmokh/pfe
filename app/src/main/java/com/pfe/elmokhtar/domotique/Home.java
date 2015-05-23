@@ -29,6 +29,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.pfe.elmokhtar.domotique.historique.historiqueFragment;
+import com.pfe.elmokhtar.domotique.statistiques.statistiquesFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -111,6 +112,13 @@ public class Home extends Activity {
                     /*
                 Pieces
                  */
+                if(position == 1){
+
+                    Fragment statistiques= new statistiquesFragment();
+                    Bundle args = new Bundle();
+                    args.putString("Menu",menu[position]);
+                    fragmentManager.beginTransaction().replace(R.id.content_frame,statistiques).commit();
+                }
                 if(position == 2){
 
                     Fragment historique= new historiqueFragment();

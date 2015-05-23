@@ -134,6 +134,6 @@ public class historiqueFragment extends Fragment {
             etatt="allumé";
         }
 
-        return "le peripherique "+nom+" du "+piece+" a été "+etatt+".";
+        return "le peripherique "+nom.toUpperCase()+" du "+piece+" a été "+etatt+".";
     }
 }

@@ -46,7 +46,7 @@ public class CheckLoginActivity extends Activity {
         i = new Intent(this , Home.class);
         prgDialog = new ProgressDialog(this);
         // Set Progress Dialog Text
-        prgDialog.setMessage("Please wait...");
+        prgDialog.setMessage("Connexion en cours...");
         // Set Cancelable as False
         prgDialog.setCancelable(false);
 
@@ -66,7 +66,7 @@ public class CheckLoginActivity extends Activity {
         // When Username is not greater than or equal to 5 characters
         else {
             imgView.setBackgroundResource(R.drawable.ic_action_warning);
-            textView.setText("Username must be minimum 5 characters");
+            textView.setText("Pseudo doit être de 5 caractères au minimum");
         }
     }
 

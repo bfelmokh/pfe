@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -70,7 +71,7 @@ public class statistiquesFragment extends Fragment {
         mchart.setDrawHoleEnabled(true);
         mchart.setHoleColorTransparent(true);
         mchart.setHoleRadius(30);
-        mchart.setTransparentCircleRadius(10);
+        mchart.setTransparentCircleRadius(35);
         mchart.setRotationAngle(0);
         mchart.setRotationEnabled(true);
         mchart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -78,7 +79,7 @@ public class statistiquesFragment extends Fragment {
             public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
                 if (e==null)
                     return;
-                Toast.makeText(getActivity(),xData[e.getXIndex()]+" = "+String.valueOf(e.getVal())+" fois utilisés",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),xData[e.getXIndex()]+" a été utilisé"+(int)e.getVal()+" fois ",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -108,7 +109,7 @@ public class statistiquesFragment extends Fragment {
         }
         PieDataSet dataSet = new PieDataSet(yVals,"Liste des Peripheriques");
         dataSet.setSliceSpace(3);
-        dataSet.setSelectionShift(5);
+        dataSet.setSelectionShift(7);
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
@@ -145,6 +146,7 @@ public class statistiquesFragment extends Fragment {
                     // When the response returned by REST has Http response code '200'
                     @Override
                     public void onFinish(){
+                        mchart.animateY(500, Easing.EasingOption.Linear);
                         addData();
                     }
                     public void onSuccess(String response) {
@@ -161,7 +163,6 @@ public class statistiquesFragment extends Fragment {
                                 JSONObject statistique = array.getJSONObject(i);
                                 xData[i]=statistique.getString("nom");
                                 yData[i]=statistique.getInt("occurence");
-                                System.out.println(statistique.getInt("occurence"));
                             }
 
 

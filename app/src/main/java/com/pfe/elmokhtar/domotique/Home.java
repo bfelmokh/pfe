@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.pfe.elmokhtar.domotique.Scenario.ScenarioFragment;
 import com.pfe.elmokhtar.domotique.historique.historiqueFragment;
 import com.pfe.elmokhtar.domotique.statistiques.statistiquesFragment;
 
@@ -104,10 +105,7 @@ public class Home extends Activity {
                     args.putString("Menu", menu[position]);
 
                     fragmentManager.beginTransaction().replace(R.id.content_frame, detail).commit();
-                //    args.putStringArrayList("lp", li);
-                 //   detail.setArguments(args);
-                  //  if(li.isEmpty())
-                   //     System.out.println("null Catched !");
+
                 }
                     /*
                 Pieces
@@ -126,7 +124,13 @@ public class Home extends Activity {
                     args.putString("Menu",menu[position]);
                     fragmentManager.beginTransaction().replace(R.id.content_frame,historique).commit();
                 }
+                if(position == 3){
 
+                    Fragment scenario= new ScenarioFragment();
+                    Bundle args = new Bundle();
+                    args.putString("Menu",menu[position]);
+                    fragmentManager.beginTransaction().replace(R.id.content_frame,scenario).commit();
+                }
                 if (position == 5) {
 
                     Intent intent = new Intent(Home.this, CheckLoginActivity.class);

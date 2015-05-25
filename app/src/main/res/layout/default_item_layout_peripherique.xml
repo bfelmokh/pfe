@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="#FFFFFF"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/selector_medium_high"
     android:layout_marginTop="10px"
     android:elevation="2dp"
     >

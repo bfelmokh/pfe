@@ -65,9 +65,7 @@ public class historiqueFragment extends Fragment {
                     public void onFinish(){
                         try {
                             if(!lil.isEmpty()){
-                                //ArrayAdapter<String> adapter;
-                                //adapter = new ArrayAdapter<String>(DetailFragment.this.getActivity(), android.R.layout.simple_list_item_1, lil);
-                                //list.setAdapter(adapter);
+
                                 itemAdapter msgAdapter = new itemAdapter(getActivity().getLayoutInflater(), lil);
                                 msgView.setAdapter(msgAdapter);
                                 }

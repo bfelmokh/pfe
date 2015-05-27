@@ -12,7 +12,7 @@ public class item {
     private String id;
     private String libelle;
     private String peri;
-    public item(String libelle, String peri,String id) {
+    public item(String id, String peri,String libelle) {
         this.id=id;
         this.libelle = libelle;
         this.peri = peri;

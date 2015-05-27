@@ -95,7 +95,7 @@ public class Home extends Activity {
                 dLayout.closeDrawers();
 
                 FragmentManager fragmentManager = getFragmentManager();
-
+                setTitle(menu[position]);
                 if (position == 0) {
                 /*
                 Pieces

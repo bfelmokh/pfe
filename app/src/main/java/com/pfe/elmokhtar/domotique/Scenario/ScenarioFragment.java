@@ -2,6 +2,7 @@ package com.pfe.elmokhtar.domotique.Scenario;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -38,6 +39,8 @@ public class ScenarioFragment extends Fragment {
         msgView = (RecyclerView) view.findViewById(R.id.RVscenario);
         msgView.setLayoutManager(new LinearLayoutManager(getActivity()));
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+
+
         invokeWS();
         /*refresh test*/
         mSwipeRefresh=(SwipeRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);

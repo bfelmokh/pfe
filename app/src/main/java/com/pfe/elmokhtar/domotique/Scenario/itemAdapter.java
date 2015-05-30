@@ -1,6 +1,8 @@
 package com.pfe.elmokhtar.domotique.Scenario;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +49,7 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
 
     @Override
     public void onBindViewHolder(final MessagesViewHolder holder, int position)  {
-        item message = messages.get(position);
+        final item message = messages.get(position);
         holder.id.setText(message.getId());
         holder.libelle.setText(message.getLibelle());
         holder.peri.setText(message.getPeri());
@@ -57,7 +59,8 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
             @Override
             public void onClick(View v, int pos, boolean isLongClick) {
                 if (isLongClick) {
-                    // View v at position pos is long-clicked.
+
+                    applique(messages.get(pos).getId());
 
                 } else {
                     // View v at position pos is clicked.
@@ -169,6 +172,54 @@ public class itemAdapter extends RecyclerView.Adapter<itemAdapter.MessagesViewHo
                             e.printStackTrace();
                         }
 
+                    }
+
+                    // When the response returned by REST has Http response code other than '200' such as '404', '500' or '403' etc
+                    @Override
+                    public void onFailure(int statusCode, Throwable error, String content) {
+                        // Hide Progress Dialog
+
+                        // When Http response code is '404'
+                        if (statusCode == 404) {
+                            Toast.makeText(itemMessage.getContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+                        }
+                        // When Http response code is '500'
+                        else if (statusCode == 500) {
+                            Toast.makeText(itemMessage.getContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+                        }
+                        // When Http response code other than 404, 500
+                        else {
+                            Toast.makeText(itemMessage.getContext(), "Unexpected Error occcured! [Most common Error: Device might " +
+                                            "not be connected to Internet or remote server is not up and running], check for other errors as well",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+
+                });
+        return s;
+    }
+
+    public String applique(String s) {
+        // Show Progress Dialog
+        // Make RESTful webservice call using AsyncHttpClient object
+        SharedPreferences sp;
+        sp = itemMessage.getContext().getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor =sp.edit();
+        String user = sp.getString("pseudo","");
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get("http://" + itemMessage.getContext().getString(R.string.IP) + "/WEB-INF/scenario/appliquer/"+user+"/"+id,
+                new AsyncHttpResponseHandler() {
+                    // When the response returned by REST has Http response code '200'
+                    @Override
+                    public void onFinish() {
+
+                    }
+
+                    public void onSuccess(String response) {
+                        // Hide Progress Dialog
+
+                        Toast.makeText(itemMessage.getContext(), response , Toast.LENGTH_LONG).show();
                     }
 
                     // When the response returned by REST has Http response code other than '200' such as '404', '500' or '403' etc
